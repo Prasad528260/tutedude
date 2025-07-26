@@ -1,22 +1,21 @@
-<<<<<<< Updated upstream
-import "./App.css";
-import BottomNav from "./components/Orders/BottomNav";
-import Orders from "./components/Orders/Orders";
-
-function App() {
+import React from 'react'
+import AuthPage from './components/auth/AuthPage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Body from './components/layout/Body'
+import Orders from './components/Orders/Orders'
+import NearbyVendorsScreen from './components/NearbyVendorsScreeen/NearbyVendorsScreen.jsx'
+const App = () => {
   return (
-    <div className="app-container">
-      <Orders />
-      <BottomNav />
-    </div>
-  );
-=======
-import './App.css';
-import AuthPage from './components/auth/AuthPage';
-
-function App() {
-  return <AuthPage />;
->>>>>>> Stashed changes
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthPage />} />
+        <Route path="/body" element={<Body />} >
+        <Route path="/body/orders" element={<Orders />} />
+        <Route path="/body/nearby-vendors" element={<NearbyVendorsScreen />} />
+        </Route>
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
