@@ -5,6 +5,8 @@ const shopSchema = new mongoose.Schema({
     description: String,
     location: {type: String},
     image: String,
+    totalOrders: {type: Number, default: 0},
+   
 });
 
 export default mongoose.model("Shop", shopSchema);

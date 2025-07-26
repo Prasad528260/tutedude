@@ -1,14 +1,20 @@
 import express from "express";
-const productRouter = express.Router();
+const router = express.Router();
 import {
   addProduct,
   getProducts,
-  getProduct,
+  getProduct
 } from "../controllers/productController";
-import { userAuth } from "../middleware/userAuth";
+import { userAuth, shopkeeperAuth } from "../middleware/userAuth";
 
-productRouter.post("/addProduct/:shopId", userAuth, addProduct);
-productRouter.get("/getProducts", userAuth, getProducts);
-productRouter.get("/getProduct/:id", userAuth, getProduct);
 
-export default productRouter;
+// Shopkeeper creates a product
+router.post("/shops/:shopId/products", userAuth, shopkeeperAuth, addProduct);
+
+// Vendor views all products
+router.get("/products", userAuth, getProducts);
+
+// Get single product details
+router.get("/products/:id", userAuth, getProduct);
+
+export default router;

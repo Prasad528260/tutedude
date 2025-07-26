@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   contactNumber: { type: String, required: true },
-  location: { type: String },
+  location: { type: String,required:true },
   image: { type: String },
   
   
