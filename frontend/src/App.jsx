@@ -1,17 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import Login from './components/auth/login'
-import Header from './components/Header'
+import "./App.css";
+import BottomNav from "./components/Orders/BottomNav";
+import Orders from "./components/Orders/Orders";
 
 function App() {
-
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <div>hello</div>
-    </>
-  )
+    <div className="app-container">
+      <Orders />
+      <BottomNav />
+    </div>
+  );
 }
 
-export default App
+export default App;
