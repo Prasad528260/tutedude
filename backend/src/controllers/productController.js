@@ -18,16 +18,16 @@ export const getProducts = async (req, res) => {
         let query = { available: true };
         let sortOption = {};
 
-        // Filter by exact product name if provided
+      
         if (name) {
             query.name = {$regex: name, $options: 'i'};
         }
 
-        // Set sort option based on query parameter
+
         if (sort === 'price_asc') {
-            sortOption = { price: 1 }; // Sort by price low to high
+            sortOption = { price: 1 }; 
         } else if (sort === 'price_desc') {
-            sortOption = { price: -1 }; // Sort by price high to low
+            sortOption = { price: -1 }; 
         }
 
         const products = await Product.find(query).sort(sortOption);
