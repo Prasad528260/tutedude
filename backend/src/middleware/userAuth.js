@@ -1,12 +1,13 @@
 import User from "../models/user";
 import jwt from "jsonwebtoken";
+import {JWT_SECRET} from "../constants/constants";
 export const userAuth = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
         console.log("TOKEN NOT FOUND AT USER AUTH");
         return res.status(401).json({ message: "Unauthorized" });
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     const {id,role} = decoded;
     const user = User.findById(id);
     if (!user) {
@@ -22,9 +23,9 @@ export const vendorAuth = (req, res, next) => {
         console.log("TOKEN NOT FOUND AT VENDOR AUTH");
         return res.status(401).json({ message: "Unauthorized" });
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     const {id,role} = decoded;
-    const user = User.findOne({id, role});
+    const user = User.findOne({id, role:"vendor"});
     if (!user) {
         console.log("USER NOT FOUND AT VENDOR AUTH");
         return res.status(401).json({ message: "Unauthorized" });
@@ -38,9 +39,9 @@ export const shopkeeperAuth = (req, res, next) => {
         console.log("TOKEN NOT FOUND AT SHOPKEEPER AUTH");
         return res.status(401).json({ message: "Unauthorized" });
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     const {id,role} = decoded;
-    const user = User.findOne({id, role});
+    const user = User.findOne({id, role:"shopkeeper"});
     if (!user) {
         console.log("USER NOT FOUND AT SHOPKEEPER AUTH");
         return res.status(401).json({ message: "Unauthorized" });
