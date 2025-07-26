@@ -1,51 +1,45 @@
 import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema({
-  shopkeeperId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "User",
-    required: true 
-  },
-  vendorId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "User",
-    required: true 
-  },
-  productId: { 
-    type: mongoose.Schema.Types.ObjectId, 
+const orderItemSchema = new mongoose.Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
-    required: true 
+    required: true
   },
-  quantity: {
-    type: Number,
-    required: true,
-    min: 1
+  name: String,
+  price: Number,
+  quantity: Number
+}, { _id: false });
+
+const orderSchema = new mongoose.Schema({
+  shop: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Shop",
+    required: true
   },
+  vendor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  items: [orderItemSchema],
   totalAmount: {
     type: Number,
     required: true
   },
   status: {
     type: String,
-    enum: ["pending", "completed"],
-    default: "pending"
+    enum: ['pending', 'processing', 'completed', 'cancelled'],
+    default: 'pending'
   },
-  isRepeat: {
+  isRepeated: {
     type: Boolean,
     default: false
   },
-  originalOrderId: {
+  originalOrder: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Order"
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
   }
-});
+}, { timestamps: true });
 
-// Index for faster queries on vendor and status
-orderSchema.index({ vendorId: 1, status: 1 });
-orderSchema.index({ shopkeeperId: 1, status: 1 });
-
-export const Order = mongoose.model("Order", orderSchema);
+export const Order = mongoose.model('Order', orderSchema);
