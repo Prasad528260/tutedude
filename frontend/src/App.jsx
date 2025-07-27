@@ -6,8 +6,8 @@ import Landing from './components/Landing/Landing'
 import Body from './components/layout/Body'
 import NearbyVendorsScreen from './components/NearbyVendorsScreeen/NearbyVendorsScreen.jsx'
 import Orders from './components/Orders/Orders'
-import ProductDetails from './components/products/ProductDetails'
-import Products from './components/products/Products'
+import ProductDetails from './components/product/ProductDetails'
+import Products from './components/product/Products'
 import Profile from './components/profile/Profile'
 
 const App = () => {
