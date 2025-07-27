@@ -4,8 +4,8 @@ import {
   addProduct,
   getProducts,
   getProduct
-} from "../controllers/productController";
-import { userAuth, shopkeeperAuth } from "../middleware/userAuth";
+} from "../controllers/productController.js";
+import { userAuth, shopkeeperAuth } from "../middleware/userAuth.js";
 
 
 // Shopkeeper creates a product

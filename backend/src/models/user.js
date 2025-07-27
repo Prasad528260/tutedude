@@ -39,22 +39,43 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 userSchema.methods.generateAuthToken = function() {
-  return jwt.sign(
-    { id: this._id, role: this.role },
-    process.env.JWT_SECRET,
-    { expiresIn: '30d' }
-  );
+  if (!process.env.JWT_SECRET) {
+    console.error('JWT_SECRET is not defined in environment variables');
+    return null;
+  }
+  
+  try {
+    return jwt.sign(
+      { 
+        id: this._id, 
+        role: this.role,
+        email: this.email
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '30d' }
+    );
+  } catch (error) {
+    console.error('Error generating auth token:', error);
+    return null;
+  }
 };
 
-// Hash password before saving
+// Hash password before saving if it was modified
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 8);
-  next();
+  
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Method to compare passwords
 userSchema.methods.comparePassword = async function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
-export const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+export default User;

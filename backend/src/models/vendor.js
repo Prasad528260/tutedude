@@ -8,4 +8,6 @@ const vendorSchema = new mongoose.Schema({
   images: String,
 });
 
-export default mongoose.model("Vendor", vendorSchema);
+const Vendor = mongoose.model("Vendor", vendorSchema);
+export default Vendor;
+

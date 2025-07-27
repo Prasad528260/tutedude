@@ -6,7 +6,8 @@ import Landing from './components/Landing/Landing'
 import Body from './components/layout/Body'
 import NearbyVendorsScreen from './components/NearbyVendorsScreeen/NearbyVendorsScreen.jsx'
 import Orders from './components/Orders/Orders'
-import Products from './components/Products/Products'
+import ProductDetails from './components/products/ProductDetails'
+import Products from './components/products/Products'
 import Profile from './components/profile/Profile'
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route index element={<Navigate to="/body/home" replace />} />
           <Route path="home" element={<Landing />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<ProductDetails />} />
           <Route path="orders" element={<Orders />} />
           <Route path="nearby-vendors" element={<NearbyVendorsScreen />} />
           <Route path="profile" element={<Profile />} />

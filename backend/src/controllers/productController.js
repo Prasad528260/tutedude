@@ -1,5 +1,5 @@
-import Product from "../models/product";
-import Shop from "../models/shop";
+import Product from "../models/product.js";
+import Shop from "../models/shop.js";
 
 // Shopkeeper adds a new product to their shop
 export const addProduct = async (req, res) => {

@@ -1,6 +1,6 @@
-import User from "../models/user";
+import User from "../models/user.js";
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../constants/constants";
+import {JWT_SECRET} from "../constants/constants.js";
 export const userAuth = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
