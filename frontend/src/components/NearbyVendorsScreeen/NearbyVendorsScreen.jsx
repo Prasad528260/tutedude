@@ -443,10 +443,7 @@ const NearbyVendorsScreen = () => {
             </h3>
             <p className="text-gray-600 text-sm">{primaryCategory}</p>
           </div>
-          <div
-            className="flex items-center px-2 py-1 rounded-full"
-            style={{ backgroundColor: "#C1DBB3" }}
-          >
+          <div className="flex items-center px-2 py-1 rounded-full bg-[#C1DBB3]">
             <Star className="w-3 h-3 fill-green-800 text-green-800 mr-1" />
             <span className="text-sm font-semibold text-green-800">
               {vendor.rating}
@@ -510,11 +507,10 @@ const NearbyVendorsScreen = () => {
 
         {/* Collaboration Stats */}
         <div
-          className="flex items-center justify-between mb-4 p-2 rounded-lg"
-          style={{ backgroundColor: "#FAEDCA" }}
+          className="flex items-center justify-between mb-4 p-2 rounded-lg bg-yellow-100"
         >
           <div className="flex items-center">
-            <Handshake className="w-4 h-4 mr-2" style={{ color: "#FE5D26" }} />
+            <Handshake className="w-4 h-4 mr-2 text-[#FE5D26]" />
             <span className="text-sm font-medium text-gray-700">
               {vendor.collaborations} Collabs
             </span>
@@ -528,12 +524,9 @@ const NearbyVendorsScreen = () => {
           <span
             className={`text-xs px-2 py-1 rounded-full ${
               vendor.shop.isOpen
-                ? "text-green-800"
+                ? "text-green-800 bg-[#C1DBB3]"
                 : "bg-gray-100 text-gray-600"
             }`}
-            style={{
-              backgroundColor: vendor.shop.isOpen ? "#C1DBB3" : "#f3f4f6",
-            }}
           >
             {vendor.shop.isOpen ? "Open" : "Closed"}
           </span>
@@ -543,19 +536,13 @@ const NearbyVendorsScreen = () => {
         <div className="flex space-x-2">
           <a
             href={`tel:${vendor.user.contactNumber}`}
-            className="flex-1 text-white font-semibold py-2 px-3 rounded-lg transition-colors flex items-center justify-center"
-            style={{ backgroundColor: "#C1DBB3" }}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.9")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+            className="flex-1 text-white font-semibold py-2 px-3 rounded-lg flex items-center justify-center bg-[#C1DBB3] hover:opacity-90 transition-opacity"
           >
             <Phone className="w-4 h-4 mr-2" />
             Call
           </a>
           <button
-            className="flex-1 text-white font-semibold py-2 px-3 rounded-lg transition-colors flex items-center justify-center"
-            style={{ backgroundColor: "#F2C078" }}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.9")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+            className="flex-1 text-white font-semibold py-2 px-3 rounded-lg flex items-center justify-center bg-[#F2C078] hover:opacity-90 transition-opacity"
           >
             <MessageCircle className="w-4 h-4 mr-2" />
             Chat
@@ -566,13 +553,8 @@ const NearbyVendorsScreen = () => {
             className={`flex-1 font-semibold py-2 px-3 rounded-lg transition-colors flex items-center justify-center ${
               collaborationRequests.has(vendor.id)
                 ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                : "text-white"
+                : "text-white bg-[#FE5D26]"
             }`}
-            style={{
-              backgroundColor: collaborationRequests.has(vendor.id)
-                ? "#e5e7eb"
-                : "#FE5D26",
-            }}
             onMouseEnter={(e) => {
               if (!collaborationRequests.has(vendor.id)) {
                 e.target.style.opacity = "0.9";
