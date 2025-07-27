@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Body from './components/layout/Body'
 import Orders from './components/Orders/Orders'
 import NearbyVendorsScreen from './components/NearbyVendorsScreeen/NearbyVendorsScreen.jsx'
+import './App.css'
 const App = () => {
   return (
     <Router>
