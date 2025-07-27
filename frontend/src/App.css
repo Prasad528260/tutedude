@@ -19,3 +19,8 @@ body {
   box-sizing: border-box;
   padding-bottom: 80px; /* ensure enough space for nav and scrollbar */
 }
+@media (max-width: 600px) {
+  .with-bottom-nav-padding {
+    padding-bottom: 64px;
+  }
+}

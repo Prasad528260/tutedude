@@ -3,13 +3,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 60px;
+  width: 100vw;
+  height: 64px;
   background: #fff;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.07), 0 -1px 4px rgba(0,0,0,0.04);
   border-top: 1px solid #eee;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 100;
+  z-index: 1000;
+  padding: 0 0;
+  margin: 0 auto;
 }
 .bottom-nav-item {
   display: flex;
@@ -33,9 +37,26 @@
 .bottom-nav-label {
   font-size: 0.85rem;
 }
+@media (min-width: 601px) {
+  .bottom-nav {
+    max-width: none;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    width: 100vw;
+    bottom: 0;
+    margin: 0;
+  }
+}
 @media (max-width: 600px) {
   .bottom-nav {
-    height: 54px;
+    height: 56px;
+    font-size: 0.9rem;
+    width: 100vw;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    margin-bottom: 0;
   }
   .bottom-nav-icon {
     font-size: 1.1rem;

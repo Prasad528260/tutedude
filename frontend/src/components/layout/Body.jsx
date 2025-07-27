@@ -1,12 +1,14 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import BottomNav from '../Orders/BottomNav'
 import '../../App.css'
+import BottomNav from '../Orders/BottomNav'
 const Body = () => {
   return (
     <>
-    <Outlet />
-    <BottomNav />
+      <div className="with-bottom-nav-padding">
+        <Outlet />
+      </div>
+      <BottomNav />
     </>
   )
 }
