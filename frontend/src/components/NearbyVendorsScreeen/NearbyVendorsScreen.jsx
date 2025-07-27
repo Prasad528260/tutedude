@@ -1,33 +1,26 @@
-import React, { useState } from "react";
 import {
-  Search,
-  Filter,
-  MapPin,
-  Star,
-  Clock,
-  Grid,
-  Map,
-  Phone,
-  MessageCircle,
   ChevronDown,
-  Users,
-  ShoppingCart,
+  Clock,
+  Filter,
   Handshake,
-  Building2,
-  Mail,
-  Globe,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Search,
+  ShoppingCart,
+  Star,
+  Users
 } from "lucide-react";
+import React, { useState } from "react";
 import './NearbyVendorsScreen.css';
 
 const NearbyVendorsScreen = () => {
-  const [viewMode, setViewMode] = useState("list");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [collaborationRequests, setCollaborationRequests] = useState(new Set());
   const [sortBy, setSortBy] = useState("distance");
   const [selectedVendor, setSelectedVendor] = useState(null);
-  const [mapCenter, setMapCenter] = useState({ lat: 28.4595, lng: 77.0266 });
 
   // Vendor data
   const vendors = [
@@ -127,7 +120,7 @@ const NearbyVendorsScreen = () => {
         email: "sneha@gmail.com",
         contactNumber: "+91 65432 10987",
         location: "faridabad",
-        image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
         role: "vendor",
       },
       shop: {
@@ -194,7 +187,7 @@ const NearbyVendorsScreen = () => {
         shopName: "Urban Kitchen Supplies",
         description: "Professional kitchen equipment and utensils",
         location: "cyber city, gurgaon",
-        image: "https://images.unsplash.com/photo-1556909114-fcd25c85cd64?w=400&h=250&fit=crop",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=250&fit=crop", // <-- new image link
         totalOrders: 420,
         isOpen: true,
         coordinates: { lat: 28.485, lng: 77.09 },
@@ -292,10 +285,11 @@ const NearbyVendorsScreen = () => {
           return a.distance - b.distance;
         case "rating":
           return b.rating - a.rating;
-        case "deliveryTime":
+        case "deliveryTime": {
           const aTime = parseInt(a.deliveryTime.split("-")[0]);
           const bTime = parseInt(b.deliveryTime.split("-")[0]);
           return aTime - bTime;
+        }
         case "collaborations":
           return b.collaborations - a.collaborations;
         default:
@@ -316,138 +310,179 @@ const NearbyVendorsScreen = () => {
     return categories.slice(0, 3);
   };
 
-  const getMapPosition = (vendor) => {
-    const { lat, lng } = vendor.shop.coordinates;
-    const offsetX = ((lng - mapCenter.lng) * 100000) % 100;
-    const offsetY = ((lat - mapCenter.lat) * 100000) % 100;
-    return {
-      left: `${50 + offsetX}%`,
-      top: `${50 + offsetY}%`,
-    };
-  };
-
   const VendorCard = ({ vendor }) => {
     const primaryCategory = vendor.products[0]?.category || "General";
     const specialities = getSpecialities(vendor.products);
 
     return (
-      <div className="vendor-card">
-        <div className="vendor-header">
+      <div className="vendor-card" style={{ position: "relative", overflow: "visible" }}>
+        {/* Shop Banner Image */}
+        <div style={{ position: "relative" }}>
+          <img
+            src={vendor.shop.image}
+            alt={vendor.shop.shopName}
+            style={{
+              width: "100%",
+              height: "120px",
+              objectFit: "cover",
+              borderTopLeftRadius: "1rem",
+              borderTopRightRadius: "1rem"
+            }}
+          />
+          {/* Status dot */}
+          <span
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: vendor.shop.isOpen ? "#22c55e" : "#a3a3a3",
+              border: "2px solid #fff"
+            }}
+          />
+        </div>
+
+        {/* Avatar - absolute, centered horizontally, overlaps banner and card */}
+        <div
+          style={{
+            position: "absolute",
+            top: 80, // 120px (banner height) - 40px (half avatar height)
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 2,
+            background: "#fff",
+            borderRadius: "50%",
+            padding: 4,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+          }}
+        >
           <img
             src={vendor.user.image}
             alt={vendor.user.name}
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "3px solid #fff",
+              background: "#f3f4f6"
+            }}
             className="vendor-avatar"
           />
-          <div className="vendor-info">
-            <h3 className="vendor-name">
-              {vendor.user.name}
-            </h3>
-            <p className="vendor-category">{primaryCategory}</p>
+        </div>
+
+        {/* Card content, add top padding to avoid overlap */}
+        <div style={{ paddingTop: 56 }}>
+          <div className="vendor-header" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div className="vendor-info">
+              <h3 className="vendor-name">{vendor.user.name}</h3>
+              <p className="vendor-category">{primaryCategory}</p>
+            </div>
+            <div className="rating-badge" style={{ marginLeft: "auto", display: "flex", alignItems: "center", background: "#fef3c7", borderRadius: 16, padding: "4px 10px" }}>
+              <Star className="rating-star" style={{ color: "#f59e42", marginRight: 4 }} />
+              <span className="rating-text">{vendor.rating}</span>
+            </div>
           </div>
-          <div className="rating-badge">
-            <Star className="rating-star" />
-            <span className="rating-text">
-              {vendor.rating}
-            </span>
+
+          <p className="vendor-description">
+            {vendor.shop.description}
+          </p>
+
+          <div className="vendor-location">
+            <MapPin className="location-icon" />
+            <p className="location-text">
+              {vendor.shop.location}
+            </p>
           </div>
-        </div>
 
-        <p className="vendor-description">
-          {vendor.shop.description}
-        </p>
+          <div className="vendor-delivery">
+            <Clock className="delivery-icon" />
+            <span className="delivery-text">{vendor.deliveryTime}</span>
+          </div>
 
-        <div className="vendor-location">
-          <MapPin className="location-icon" />
-          <p className="location-text">
-            {vendor.shop.location}
-          </p>
-        </div>
+          <div className="vendor-specialities">
+            <p className="specialities-label">
+              Specialities
+            </p>
+            <div className="specialities-tags">
+              {specialities.map((speciality, index) => (
+                <span
+                  key={index}
+                  className="speciality-tag"
+                >
+                  {speciality}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        <div className="vendor-delivery">
-          <Clock className="delivery-icon" />
-          <span className="delivery-text">{vendor.deliveryTime}</span>
-        </div>
+          <div className="vendor-stats">
+            <p className="stats-label">
+              Bulk Interests
+            </p>
+            <div className="stats-tags">
+              {vendor.bulkInterests.slice(0, 3).map((interest, index) => (
+                <span
+                  key={index}
+                  className="stat-tag"
+                >
+                  {interest}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        <div className="vendor-specialities">
-          <p className="specialities-label">
-            Specialities
-          </p>
-          <div className="specialities-tags">
-            {specialities.map((speciality, index) => (
-              <span
-                key={index}
-                className="speciality-tag"
-              >
-                {speciality}
+          <div className="vendor-metrics">
+            <div className="metric-item">
+              <Handshake className="metric-icon" style={{ color: "#FE5D26" }} />
+              <span className="metric-text">
+                {vendor.collaborations} collaborations
               </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="vendor-stats">
-          <p className="stats-label">
-            Bulk Interests
-          </p>
-          <div className="stats-tags">
-            {vendor.bulkInterests.slice(0, 3).map((interest, index) => (
-              <span
-                key={index}
-                className="stat-tag"
-              >
-                {interest}
+            </div>
+            <div className="metric-item">
+              <ShoppingCart className="metric-icon" />
+              <span className="metric-count">
+                {vendor.shop.totalOrders} orders
               </span>
-            ))}
+            </div>
           </div>
-        </div>
 
-        <div className="vendor-metrics">
-          <div className="metric-item">
-            <Handshake className="metric-icon" style={{ color: "#FE5D26" }} />
-            <span className="metric-text">
-              {vendor.collaborations} collaborations
+          <div className="vendor-status">
+            <span className={`status-badge ${vendor.shop.isOpen ? 'open' : 'closed'}`}>
+              {vendor.shop.isOpen ? "Open" : "Closed"}
             </span>
           </div>
-          <div className="metric-item">
-            <ShoppingCart className="metric-icon" />
-            <span className="metric-count">
-              {vendor.shop.totalOrders} orders
-            </span>
+
+          <div className="vendor-actions">
+            <a
+              href={`tel:${vendor.user.contactNumber}`}
+              className="action-btn call-btn"
+            >
+              <Phone className="action-icon" />
+              Call
+            </a>
+            <button className="action-btn chat-btn">
+              <MessageCircle className="action-icon" />
+              Chat
+            </button>
+            <button
+              onClick={() => sendCollaborationRequest(vendor.id)}
+              disabled={collaborationRequests.has(vendor.id)}
+              className={`action-btn collaborate-btn ${collaborationRequests.has(vendor.id) ? 'disabled' : ''}`}
+            >
+              <Users className="action-icon" />
+              {collaborationRequests.has(vendor.id) ? 'Sent' : 'Collaborate'}
+            </button>
           </div>
-        </div>
-
-        <div className="vendor-status">
-          <span className={`status-badge ${vendor.shop.isOpen ? 'open' : 'closed'}`}>
-            {vendor.shop.isOpen ? "Open" : "Closed"}
-          </span>
-        </div>
-
-        <div className="vendor-actions">
-          <a
-            href={`tel:${vendor.user.contactNumber}`}
-            className="action-btn call-btn"
-          >
-            <Phone className="action-icon" />
-            Call
-          </a>
-          <button className="action-btn chat-btn">
-            <MessageCircle className="action-icon" />
-            Chat
-          </button>
-          <button
-            onClick={() => sendCollaborationRequest(vendor.id)}
-            disabled={collaborationRequests.has(vendor.id)}
-            className={`action-btn collaborate-btn ${collaborationRequests.has(vendor.id) ? 'disabled' : ''}`}
-          >
-            <Users className="action-icon" />
-            {collaborationRequests.has(vendor.id) ? 'Sent' : 'Collaborate'}
-          </button>
         </div>
       </div>
     );
   };
 
   return (
-    <div className="nearby-vendors-container">
+    <div className="nearby-vendors-container with-bottom-nav-padding">
       <div className="filters-section">
         <div className="filter-tabs">
           <div className="filter-tabs-container">
@@ -469,6 +504,16 @@ const NearbyVendorsScreen = () => {
           </div>
 
           <div className="sort-controls">
+            <div className="search-input-container">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search vendors..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="search-icon" />
+            </div>
             <div className="sort-select-container">
               <select
                 className="sort-select"
@@ -495,48 +540,11 @@ const NearbyVendorsScreen = () => {
         </div>
       </div>
 
-      <div className="view-toggle">
-        <div className="toggle-group">
-          <button
-            className={`toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
-            onClick={() => setViewMode('list')}
-          >
-            <Grid className="toggle-icon" />
-            List
-          </button>
-          <button
-            className={`toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
-            onClick={() => setViewMode('map')}
-          >
-            <Map className="toggle-icon" />
-            Map
-          </button>
-        </div>
+      <div className="vendors-grid">
+        {sortedVendors.map((vendor) => (
+          <VendorCard key={vendor.id} vendor={vendor} />
+        ))}
       </div>
-
-      {viewMode === 'list' ? (
-        <div className="vendors-grid">
-          {sortedVendors.map((vendor) => (
-            <VendorCard key={vendor.id} vendor={vendor} />
-          ))}
-        </div>
-      ) : (
-        <div className="map-container">
-          <div className="map-placeholder">
-            <p className="map-text">Map View - Interactive map will be displayed here</p>
-            {sortedVendors.map((vendor) => (
-              <div
-                key={vendor.id}
-                className="map-marker"
-                style={getMapPosition(vendor)}
-                onClick={() => setSelectedVendor(vendor)}
-              >
-                <Building2 className="marker-icon" />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {selectedVendor && (
         <div className="vendor-modal-overlay">

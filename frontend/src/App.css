@@ -13,3 +13,9 @@
 body {
   background-color: #f8f9fa;
 }
+
+.with-bottom-nav-padding {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 80px; /* ensure enough space for nav and scrollbar */
+}
