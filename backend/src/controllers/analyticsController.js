@@ -1,5 +1,5 @@
 // controllers/analyticsController.js
-import { Order } from '../models/order.js';
+import Order from '../models/order.js';
 import mongoose from 'mongoose';
 
 const validatePeriod = (period) => ['day', 'week', 'month', 'year'].includes(period);
