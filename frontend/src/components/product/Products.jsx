@@ -12,7 +12,7 @@ import {
     TrendingUp
 } from 'lucide-react';
 import React, { useState } from 'react';
-const css = require('./Products.css');
+import './Products.css';
 
 const Products = () => {
   const [viewMode, setViewMode] = useState('grid');
