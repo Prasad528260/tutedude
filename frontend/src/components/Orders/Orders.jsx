@@ -43,31 +43,25 @@ export default function Orders() {
   const [tab, setTab] = useState("current");
   const orders = dummyOrders; // Only current orders for now
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
   const handleCall = (phoneNumber) => {
-    // Open phone dialer
     window.open(`tel:${phoneNumber}`, '_self');
   };
 
   const handleDetails = (order) => {
-    // Show order details
-    const details = `
-Order Details:
-Customer: ${order.customerName}
-Order ID: ${order.id}
-Status: ${order.status}
-Progress: ${order.progress}%
-Items: ${order.items.map(item => `${item.name} (₹${item.price})`).join(', ')}
-Total: ₹${order.total}
-Order Time: ${order.orderTime}
-Delivery Time: ${order.deliveryTime}
-Address: ${order.address}
-Phone: ${order.phone}
-    `;
-    alert(details);
+    setSelectedOrder(order);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedOrder(null);
   };
 
   return (
-    <div className="orders-container">
+    <div className="orders-container with-bottom-nav-padding">
       <div className="orders-header">
         <h2 className="orders-title">Orders</h2>
         <Bell size={24} className="notification-icon" />
@@ -96,12 +90,6 @@ Phone: ${order.phone}
                   <span className="order-id">Order #{order.id}</span>
                 </div>
                 <span className="order-status" style={{background: order.statusColor, color: order.statusTextColor}}>{order.status}</span>
-              </div>
-              <div className="order-progress">
-                <div className="order-progress-bar-bg">
-                  <div className="order-progress-bar" style={{width: `${order.progress}%`}}></div>
-                </div>
-                <span className="order-progress-text">{order.progress}%</span>
               </div>
               <div className="order-section">
                 <div className="order-section-title">Items</div>
@@ -153,6 +141,38 @@ Phone: ${order.phone}
       )}
       {tab === "history" && (
         <div className="orders-list empty">No order history yet.</div>
+      )}
+
+      {/* Order Details Modal */}
+      {modalOpen && selectedOrder && (
+        <div className="order-modal-overlay" onClick={closeModal}>
+          <div className="order-modal" onClick={e => e.stopPropagation()}>
+            <div className="order-modal-header">
+              <h3>Order Details</h3>
+              <button className="order-modal-close" onClick={closeModal}>&times;</button>
+            </div>
+            <div className="order-modal-body">
+              <div className="order-modal-row"><strong>Customer:</strong> {selectedOrder.customerName}</div>
+              <div className="order-modal-row"><strong>Order ID:</strong> {selectedOrder.id}</div>
+              <div className="order-modal-row"><strong>Status:</strong> {selectedOrder.status}</div>
+              <div className="order-modal-row"><strong>Items:</strong>
+                <ul>
+                  {selectedOrder.items.map((item, idx) => (
+                    <li key={idx}>{item.name} <span style={{color:'#888'}}>₹{item.price}</span></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="order-modal-row"><strong>Total:</strong> ₹{selectedOrder.total}</div>
+              <div className="order-modal-row"><strong>Order Time:</strong> {selectedOrder.orderTime}</div>
+              <div className="order-modal-row"><strong>Delivery Time:</strong> {selectedOrder.deliveryTime}</div>
+              <div className="order-modal-row"><strong>Address:</strong> {selectedOrder.address}</div>
+              <div className="order-modal-row"><strong>Phone:</strong> {selectedOrder.phone}</div>
+            </div>
+            <div className="order-modal-footer">
+              <button className="order-modal-btn" onClick={closeModal}>Close</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

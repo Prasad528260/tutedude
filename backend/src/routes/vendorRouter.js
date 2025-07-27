@@ -1,10 +1,10 @@
 import express from "express";
-import { userAuth } from "../middleware/userAuth";
+import { userAuth } from "../middleware/userAuth.js";
 import { 
     getNearbyVendors,
     getVendorOrderHistory,
     repeatOrder 
-} from "../controllers/vendorController";
+} from "../controllers/vendorController.js";
 
 const vendorRouter = express.Router();
 

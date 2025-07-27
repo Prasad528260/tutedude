@@ -1,10 +1,10 @@
 import express from "express";
-import { userAuth, shopkeeperAuth } from "../middleware/userAuth";
+import { userAuth, shopkeeperAuth } from "../middleware/userAuth.js";
 import { 
     createOrder, 
     getVendorOrders, 
     getShopOrders
-} from "../controllers/orderController";
+} from "../controllers/orderController.js";
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import express from "express";
-import { userAuth } from "../middleware/userAuth";
-import { addShop } from "../controllers/shopController";
+import { userAuth } from "../middleware/userAuth.js";
+import { addShop } from "../controllers/shopController.js";
 const shopRouter = express.Router();
 
 
