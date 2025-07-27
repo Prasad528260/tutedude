@@ -1,6 +1,8 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
-import {JWT_SECRET} from "../constants/constants.js";
+import dotenv from "dotenv";
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET;
 export const userAuth = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
