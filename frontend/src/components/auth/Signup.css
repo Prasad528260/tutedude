@@ -1,0 +1,251 @@
+/* Signup Page Styles */
+.signup-outer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.signup-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid #f3f4f6;
+}
+.signup-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+.signup-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 1.2rem;
+}
+.signup-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #111;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.02);
+  margin-bottom: 0;
+}
+.signup-input:focus {
+  border-color: #111;
+}
+.show-password-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+}
+.show-password-btn:hover {
+  color: #111;
+}
+.role-group {
+  flex-direction: column;
+  align-items: stretch;
+}
+.role-select-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #111;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.02);
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 0;
+  transition: border-color 0.2s;
+}
+.role-select-btn.open {
+  border-color: #facc15;
+}
+.role-select-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #facc15;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.role-select-label {
+  margin-left: 28px;
+  color: #9ca3af;
+}
+.role-select-label.selected {
+  color: #111;
+}
+.role-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+.role-chevron.open {
+  transform: translateY(-50%) rotate(180deg);
+}
+.role-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+  z-index: 10;
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+}
+.role-option {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  color: #111;
+  background: #fff;
+  font-size: 1rem;
+  transition: background 0.2s, font-weight 0.2s;
+}
+.role-option.selected {
+  font-weight: bold;
+  background: #fefce8;
+}
+.role-option:hover {
+  background: #fefce8;
+}
+.role-icon {
+  color: #facc15;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.profile-image-group {
+  margin-bottom: 0.5rem;
+}
+.profile-image-label {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+.profile-image-drop {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #fff;
+  position: relative;
+}
+.profile-image-input {
+  display: none;
+}
+.profile-image-preview {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #facc15;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+}
+.profile-upload-icon {
+  font-size: 2rem;
+  color: #9ca3af;
+  margin-bottom: 0.25rem;
+}
+.profile-upload-text {
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+.signup-submit-btn {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.signup-submit-btn:hover {
+  background: #222;
+}
+.signup-switch {
+  text-align: center;
+  color: #374151;
+  margin-top: 0.5rem;
+}
+.switch-btn {
+  color: #111;
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline transparent;
+  transition: text-decoration 0.2s;
+}
+.switch-btn:hover {
+  text-decoration: underline;
+}
+
+/* Only add extra right padding for password input in signup */
+.signup-input[type="password"],
+.signup-input[type="text"] {
+  padding-right: 2.5rem;
+} 
