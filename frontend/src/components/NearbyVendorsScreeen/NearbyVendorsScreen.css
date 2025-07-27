@@ -6,6 +6,10 @@
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+.with-bottom-nav-padding {
+  padding-bottom: 80px; /* Adjust if your bottom nav is taller/shorter */
+}
+
 /* Filters Section */
 .filters-section {
   margin-bottom: 1.5rem;

@@ -3,6 +3,8 @@
   display: flex;
   min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start;  /* Align to top, change to center for vertical centering */
 }
 
 /* Sidebar */
@@ -89,20 +91,30 @@
   background: #f8f9fa;
   padding: 2rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
 }
 
 /* Profile Tab */
 .profile-tab {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem; /* More space between sections */
 }
 
 .profile-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem 3rem;
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -192,10 +204,11 @@
 
 /* Contact Information */
 .contact-info {
+  width: 100%;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem 3rem;
   border-radius: 0.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -251,10 +264,11 @@
 
 /* Stats Section */
 .stats-section {
+  width: 100%;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem 3rem;
   border-radius: 0.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -307,8 +321,9 @@
 
 /* Recent Activity */
 .recent-activity {
+  width: 100%;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem 3rem;
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -363,10 +378,16 @@
 
 /* Settings Tab */
 .settings-tab {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .settings-list {
+  width: 100%;
   background: #fff;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -377,7 +398,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 3rem;
   border-bottom: 1px solid #e5e7eb;
   transition: all 0.2s;
 }
@@ -425,10 +446,16 @@
 
 /* Notifications Tab */
 .notifications-tab {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .notification-settings {
+  width: 100%;
   background: #fff;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -439,7 +466,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 3rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -511,10 +538,16 @@ input:checked + .toggle-slider:before {
 
 /* Security Tab */
 .security-tab {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .security-list {
+  width: 100%;
   background: #fff;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -525,7 +558,7 @@ input:checked + .toggle-slider:before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 3rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -568,10 +601,16 @@ input:checked + .toggle-slider:before {
 
 /* Help Tab */
 .help-tab {
-  max-width: 800px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .help-list {
+  width: 100%;
   background: #fff;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -579,7 +618,7 @@ input:checked + .toggle-slider:before {
 }
 
 .help-item {
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 3rem;
   border-bottom: 1px solid #e5e7eb;
   cursor: pointer;
   transition: all 0.2s;
